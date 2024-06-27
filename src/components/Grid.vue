@@ -113,7 +113,7 @@ export default {
 }
 .grid {
   display: grid;
-  gap: 10px; /* 格子之間的間隔 */
+  gap: 0; /* 調整整個網格的間隔為0 */
   width: 320px; /* 固定整體網格的寬度 */
   height: 320px; /* 固定整體網格的高度 */
   margin: 20px 0; /* 上下留出20px的間距 */
@@ -121,7 +121,7 @@ export default {
 
 .row {
   display: grid; /* 每行使用 grid 布局 */
-  gap: 10px; /* 格子之間的間隔 */
+  gap: 0; /* 調整每行中格子之間的間隔為0 */
 }
 .cell {
   width: 100%; /* 每個格子佔滿父容器寬度 */
@@ -132,6 +132,8 @@ export default {
   align-items: center;
   position: relative;
   overflow: hidden;
+  margin: 0; /* 清除 margin */
+  padding: 0; /* 清除 padding */
 }
 
 .cell-content {
@@ -141,6 +143,8 @@ export default {
   justify-content: center;
   align-items: center;
   position: relative;
+  margin: 0; /* 清除 margin */
+  padding: 0; /* 清除 padding */
 }
 
 /* 新增的CSS樣式，應用到框框的動畫效果 */
@@ -151,8 +155,8 @@ export default {
 }
 
 .border {
-  width: calc(100% - 4px); /* 讓border元素充滿cell的寬度，考慮到border的2px和內部content的2px */
-  height: calc(100% - 4px); /* 讓border元素充滿cell的高度，考慮到border的2px和內部content的2px */
+  width: calc(100%); /* 讓border元素充滿cell的寬度，考慮到border的2px和內部content的2px */
+  height: calc(100%); /* 讓border元素充滿cell的高度，考慮到border的2px和內部content的2px */
   margin: auto;
   position: relative;
   overflow: hidden;
