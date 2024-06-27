@@ -1,14 +1,14 @@
 <template>
   <div class="grid-container">
     <!-- 網格 -->
-    <div class="grid" :style="{ gridTemplateColumns: `repeat(auto-fill, minmax(${100 / gridSize}%, 1fr))` }">
-      <!-- 使用 grid-template-columns 和 grid-template-rows 來設置格子的排列 -->
-      <div v-for="rowIndex in rowCount" :key="'row-' + rowIndex" class="row">
-        <div v-for="cellIndex in columnCount" :key="'cell-' + cellIndex" class="cell">
+    <div class="grid" :style="{ gridTemplateColumns: `repeat(${gridSize}, 1fr)` }">
+      <!-- 使用 gridTemplateColumns 來設置每行的格子數 -->
+      <div v-for="rowIndex in gridSize" :key="'row-' + rowIndex" class="row">
+        <div v-for="cellIndex in gridSize" :key="'cell-' + cellIndex" class="cell">
           <!-- 每個格子的內容，包含CSS動畫 -->
           <div class="cell-content">
             <!-- 應用動畫效果 -->
-            <div :class="['border', { 'animate': shouldDisplayCell(rowIndex, cellIndex) }]">
+            <div :class="['border', { 'animate': shouldDisplayCell(rowIndex - 1, cellIndex - 1) }]">
               <div class="content"></div>
             </div>
           </div>
