@@ -1,5 +1,20 @@
 <template>
   <div class="grid-container">
+    <!-- 網格 -->
+    <div class="grid" :style="{ gridTemplateColumns: `repeat(auto-fill, minmax(${100 / gridSize}%, 1fr))` }">
+      <!-- 使用 grid-template-columns 和 grid-template-rows 來設置格子的排列 -->
+      <div v-for="rowIndex in rowCount" :key="'row-' + rowIndex" class="row">
+        <div v-for="cellIndex in columnCount" :key="'cell-' + cellIndex" class="cell">
+          <!-- 每個格子的內容，包含CSS動畫 -->
+          <div class="cell-content">
+            <!-- 應用動畫效果 -->
+            <div :class="['border', { 'animate': shouldDisplayCell(rowIndex, cellIndex) }]">
+              <div class="content"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
     <!-- 顯示模式切換按鈕 -->
     <div class="controls">
       <label>
@@ -17,21 +32,6 @@
       <button @click="setGridSize(3)">3x3</button>
       <button @click="setGridSize(5)">5x5</button>
       <button @click="setGridSize(10)">10x10</button>
-    </div>
-    <!-- 網格 -->
-    <div class="grid">
-      <!-- 使用 grid-template-columns 和 grid-template-rows 來設置格子的排列 -->
-      <div v-for="rowIndex in rowCount" :key="'row-' + rowIndex" class="row">
-        <div v-for="cellIndex in columnCount" :key="'cell-' + cellIndex" class="cell">
-          <!-- 每個格子的內容，包含CSS動畫 -->
-          <div class="cell-content">
-            <!-- 應用動畫效果 -->
-            <div :class="['border', { 'animate': shouldDisplayCell(rowIndex, cellIndex) }]">
-              <div class="content"></div>
-            </div>
-          </div>
-        </div>
-      </div>
     </div>
   </div>
 </template>
@@ -103,20 +103,29 @@ export default {
   flex-direction: column;
   align-items: center;
 }
+.controls {
+  margin-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.controls button {
+  margin-bottom: 5px;
+}
 .grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自動填充列，最小100px寬度 */
   gap: 10px; /* 格子之間的間隔 */
-  width: 320px; /* 調整整體網格的寬度 */
+  width: 320px; /* 固定整體網格的寬度 */
+  height: 320px; /* 固定整體網格的高度 */
+  margin: 20px 0; /* 上下留出20px的間距 */
 }
+
 .row {
   display: grid; /* 每行使用 grid 布局 */
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); /* 自動填充列，最小100px寬度 */
   gap: 10px; /* 格子之間的間隔 */
 }
 .cell {
   width: 100%; /* 每個格子佔滿父容器寬度 */
-  height: 100px; /* 每個格子的高度 */
+  height: 100%; /* 每個格子的高度 */
   background-color: black; /* 背景色為黑色 */
   display: flex;
   justify-content: center;
@@ -141,12 +150,14 @@ export default {
 }
 
 .border {
-  width: 100%;
-  height: 100%;
+  width: 100%; /* 讓border元素充滿cell的寬度 */
+  height: 100%; /* 讓border元素充滿cell的高度 */
   margin: auto;
   position: relative;
   overflow: hidden;
   background: gray;
+  border: 2px solid black;
+  border-radius: 10px; /* 添加內部內容的圓角 */
 }
 .border.animate {
   background: gray
@@ -190,22 +201,16 @@ export default {
   }
 }
 
-.controls {
-  margin-bottom: 10px;
-  display: flex;
-  flex-direction: column;
-}
-.controls button {
-  margin-bottom: 5px;
-}
 @media (max-width: 768px) {
   .grid {
     width: 240px; /* 在小屏幕下調整整體網格的寬度 */
+    height: 240px; /* 在小屏幕下調整整體網格的高度 */
   }
 }
 @media (max-width: 480px) {
   .grid {
     width: 180px; /* 在更小屏幕下進一步調整整體網格的寬度 */
+    height: 180px; /* 在更小屏幕下進一步調整整體網格的高度 */
   }
 }
 </style>
