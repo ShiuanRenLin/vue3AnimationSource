@@ -69,15 +69,17 @@ export default {
     },
     // 隨機選擇格子
     selectRandomCells() {
-      this.randomCells = [];
-      if (this.displayMode === 'Random') {
+    this.randomCells = [];
+    if (this.displayMode === 'Random') {
         const totalCells = this.gridSize * this.gridSize;
-        const randomCount = Math.floor(totalCells / 2); // 隨機選擇一半的格子
-        for (let i = 0; i < randomCount; i++) {
-          const randomIndex = Math.floor(Math.random() * totalCells);
-          this.randomCells.push(randomIndex);
+
+        for (let i = 0; i < totalCells; i++) {
+        // 使用 Math.random() 生成隨機數，當隨機數小於 0.5 時，將格子 i 添加到 randomCells 中
+        if (Math.random() < 0.5) {
+            this.randomCells.push(i);
         }
-      }
+        }
+    }
     },
     // 決定是否顯示特定格子的光線動畫
     shouldDisplayCell(rowIndex, cellIndex) {
