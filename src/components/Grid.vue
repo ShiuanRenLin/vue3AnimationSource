@@ -2,8 +2,14 @@
   <div class="grid-container">
     <!-- 顯示模式切換按鈕 -->
     <div class="controls">
-      <button @click="setDisplayMode('All')">All</button>
-      <button @click="setDisplayMode('Random')">Random</button>
+      <label>
+        <input type="radio" v-model="displayMode" value="All">
+        All
+      </label>
+      <label>
+        <input type="radio" v-model="displayMode" value="Random">
+        Random
+      </label>
     </div>
     <!-- 格子數量切換按鈕 -->
     <div class="controls">

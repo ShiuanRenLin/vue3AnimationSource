@@ -1,13 +1,10 @@
 <template>
-  <img alt="Vue logo" src="./assets/logo.png">
-  <!-- <HelloWorld msg="Welcome to Your Vue.js App"/> -->
   <div id="app" class="app-container">
     <GridAnimation />
   </div>
 </template>
 
 <script>
-// import HelloWorld from './components/HelloWorld.vue'
 import GridAnimation from './components/Grid.vue';
 
 export default {
@@ -18,18 +15,23 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 #app {
-  background-color: black; /* 设置背景颜色为黑色 */
+  width: 390px; /* 設置整個應用的寬度 */
+  height: 844px; /* 設置整個應用的高度 */
+  margin: 0 auto; /* 讓應用置中顯示 */
+  background-color: black; /* 背景色為黑色 */
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+  overflow: hidden; /* 如果需要，隱藏溢出內容 */
 }
 
 .app-container {
-  background-color: black; /* 如果需要确保内部内容也是黑色背景 */
+  width: 100%;
+  height: 100%;
+  background-color: black; /* 確保內部容器也是黑色背景 */
 }
 </style>
