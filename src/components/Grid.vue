@@ -133,6 +133,7 @@ export default {
   position: relative;
   overflow: hidden;
 }
+
 .cell-content {
   width: 100%;
   height: 100%;
@@ -150,15 +151,17 @@ export default {
 }
 
 .border {
-  width: 100%; /* 讓border元素充滿cell的寬度 */
-  height: 100%; /* 讓border元素充滿cell的高度 */
+  width: calc(100% - 4px); /* 讓border元素充滿cell的寬度，考慮到border的2px和內部content的2px */
+  height: calc(100% - 4px); /* 讓border元素充滿cell的高度，考慮到border的2px和內部content的2px */
   margin: auto;
   position: relative;
   overflow: hidden;
   background: gray;
   border: 2px solid black;
   border-radius: 10px; /* 添加內部內容的圓角 */
+  box-sizing: border-box; /* 保證寬度和高度包括邊框 */
 }
+
 .border.animate {
   background: gray
   repeating-conic-gradient(
@@ -170,15 +173,17 @@ export default {
   );
   animation: rotating 2s linear infinite; /* 自動運行動畫 */
 }
+
 .border .content {
   position: absolute;
-  width: 96%;
-  height: 96%;
+  width: calc(100% - 4px); /* 調整內部content的寬度 */
+  height: calc(100% - 4px); /* 調整內部content的高度 */
   top: 2px;
   left: 2px;
   background-color: black; /* 正方形內部背景色改為黑色 */
   border-radius: 10px; /* 添加內部內容的圓角 */
 }
+
 .border::after {
   content: "";
   position: absolute;
@@ -207,6 +212,7 @@ export default {
     height: 240px; /* 在小屏幕下調整整體網格的高度 */
   }
 }
+
 @media (max-width: 480px) {
   .grid {
     width: 180px; /* 在更小屏幕下進一步調整整體網格的寬度 */
