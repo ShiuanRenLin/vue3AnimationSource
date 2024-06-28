@@ -206,7 +206,6 @@ export default {
 }
 
 .border::after {
-  content: "";
   position: absolute;
   inset: 2px;
   border: 1px solid black;
