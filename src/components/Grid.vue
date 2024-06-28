@@ -178,7 +178,7 @@ export default {
   position: relative;
   overflow: hidden;
   background: gray;
-  border: 2px solid black; /* 邊框寬度將根據邏輯動態設置 */
+  border: 1px solid black; /* 邊框寬度將根據邏輯動態設置 */
   border-radius: 10px; /* 添加內部內容的圓角 */
   box-sizing: border-box; /* 保證寬度和高度包括邊框 */
 }
@@ -197,10 +197,10 @@ export default {
 
 .border .content {
   position: absolute;
-  width: calc(100% - 4px); /* 調整內部content的寬度 */
-  height: calc(100% - 4px); /* 調整內部content的高度 */
-  top: 2px;
-  left: 2px;
+  width: calc(100% - 2px); /* 調整內部content的寬度 */
+  height: calc(100% - 2px); /* 調整內部content的高度 */
+  top: 1px;
+  left: 1px;
   background-color: black; /* 正方形內部背景色改為黑色 */
   border-radius: 10px; /* 添加內部內容的圓角 */
 }
@@ -208,8 +208,8 @@ export default {
 .border::after {
   content: "";
   position: absolute;
-  inset: 4px;
-  border: 2px solid black;
+  inset: 2px;
+  border: 1px solid black;
   border-radius: 10px;
   background-color: black;
 }
