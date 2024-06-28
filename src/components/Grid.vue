@@ -188,8 +188,8 @@ export default {
   repeating-conic-gradient(
     from var(--rotate),
     #eeeeee 0%, 
-    #eeeeee 5%, 
-    transparent 5%, 
+    #eeeeee 10%, 
+    transparent 10%, 
     transparent 50%
   );
   animation: rotating 2s linear infinite; /* 自動運行動畫 */
