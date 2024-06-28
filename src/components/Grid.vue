@@ -10,9 +10,9 @@
             <!-- 應用動畫效果 -->
             <div
               :class="['border', { 'animate': shouldDisplayCell(rowIndex - 1, cellIndex - 1) }, { 'reset-animation': resetAnimation }]"
-              :style="{ borderWidth: borderWidth + 'px' }"
+              :style="{ borderWidth: borderWidth + 'px', borderRadius: borderRadius + 'px' }"
             >
-              <div class="content"></div>
+              <div class="content" :style="{ borderRadius: contentBorderRadius + 'px' }"></div>
             </div>
           </div>
         </div>
@@ -62,6 +62,14 @@ export default {
     // 根據 gridSize 計算 border 寬度
     borderWidth() {
       return Math.max(0.1, 5 - (this.gridSize / 10) * 5);
+    },
+    // 根據 gridSize 計算 border 圓角
+    borderRadius() {
+      return Math.max(0, 15 - (this.gridSize)); // 調整圓角大小
+    },
+    // 根據 gridSize 計算 content 內部圓角半徑
+    contentBorderRadius() {
+      return Math.max(0, 15 - (this.gridSize) - (1/this.gridSize)*5);
     },
   },
   methods: {
