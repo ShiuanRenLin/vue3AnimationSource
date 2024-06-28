@@ -8,7 +8,10 @@
           <!-- 每個格子的內容，包含CSS動畫 -->
           <div class="cell-content">
             <!-- 應用動畫效果 -->
-            <div :class="['border', { 'animate': shouldDisplayCell(rowIndex - 1, cellIndex - 1) }]" :style="{ borderWidth: borderWidth + 'px' }">
+            <div
+              :class="['border', { 'animate': shouldDisplayCell(rowIndex - 1, cellIndex - 1) }, { 'reset-animation': resetAnimation }]"
+              :style="{ borderWidth: borderWidth + 'px' }"
+            >
               <div class="content"></div>
             </div>
           </div>
@@ -41,9 +44,10 @@ export default {
   name: 'GridAnimation',
   data() {
     return {
-      gridSize: 1, // 預設網格大小改為1x1
+      gridSize: 1, // 預設網格大小為1x1
       displayMode: 'All', // 預設顯示模式
       randomCells: [], // 用於存儲隨機選擇的格子
+      resetAnimation: false, // 控制動畫重置的狀態
     };
   },
   computed: {
@@ -65,11 +69,13 @@ export default {
     setGridSize(size) {
       this.gridSize = size;
       this.selectRandomCells();
+      this.resetAnimationState(); // 設置重置動畫狀態
     },
     // 設置顯示模式
     setDisplayMode(mode) {
       this.displayMode = mode;
       this.selectRandomCells();
+      this.resetAnimationState(); // 設置重置動畫狀態
     },
     // 隨機選擇格子
     selectRandomCells() {
@@ -95,6 +101,15 @@ export default {
         return this.randomCells.includes(cellIndexInGrid);
       }
       return false;
+    },
+    // 設置重置動畫狀態
+    resetAnimationState() {
+      this.resetAnimation = true; // 啟動重置動畫狀態
+
+      // 50 毫秒後將重置動畫狀態設置回 false，以便重新啟動動畫
+      setTimeout(() => {
+        this.resetAnimation = false;
+      }, 50);
     },
   },
   mounted() {
@@ -184,8 +199,8 @@ export default {
 }
 
 .border.animate {
-  background: gray
-  repeating-conic-gradient(
+  background: gray;
+  background-image: repeating-conic-gradient(
     from var(--rotate),
     #eeeeee 0%, 
     #eeeeee 10%, 
@@ -214,7 +229,11 @@ export default {
 }
 
 .border.no-animation {
-  animation: none; /* 禁用動畫 */
+  animation: none !important; /* 禁用動畫 */
+}
+
+.reset-animation {
+  animation: none !important; /* 重置動畫 */
 }
 
 @keyframes rotating {
