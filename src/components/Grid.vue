@@ -207,7 +207,7 @@ export default {
     transparent 10%, 
     transparent 50%
   );
-  animation: rotating 2s linear infinite; /* 自動運行動畫 */
+  animation: rotating 2s ease-out infinite; /* 添加 easing 效果 */
 }
 
 .border .content {
@@ -239,6 +239,9 @@ export default {
 @keyframes rotating {
   0% {
     --rotate: 0deg;
+  }
+  50% {
+    --rotate: 180deg;
   }
   100% {
     --rotate: 360deg;
